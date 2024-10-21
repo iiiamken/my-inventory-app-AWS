@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss"
 import { createThemes } from "tw-colors"
-import colors from "tailwindcss/colors"
+import colors, { black } from "tailwindcss/colors"
 
 const baseColors = [
   "gray",
@@ -25,11 +25,15 @@ const shadeMapping = {
   "900": "50",
 }
 
-const generateThemeObject = (colors: any, mapping: any, invert: false) => {
+const generateThemeObject = (
+  colors: string,
+  mapping: object,
+  invert: false
+) => {
   const theme: any = {},
     baseColors = foreach((color) => {
       theme[color] = {}
-      Object.entries(mapping).forEach(([key, value]: any) => {
+      Object.entries(mapping).forEach(([key, value]): any => {
         const shadeKey = invert ? value : key
         theme[color][key] = colors[color][shadeKey]
       })
@@ -39,7 +43,18 @@ const generateThemeObject = (colors: any, mapping: any, invert: false) => {
 
 const lightTheme = generateThemeObject(colors, shadeMapping)
 const darkTheme = generateThemeObject(colors, shadeMapping, true)
+
+const themes = {
+  light: { ...lightTheme, white: "#ffffff" },
+  dark: {
+    ...darkTheme,
+    white: colors.gray["950"],
+    black: colors.gray["50"],
+  },
+}
+
 const config: Config = {
+  darkMode: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -53,6 +68,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [createThemes(themes)],
 }
 export default config
