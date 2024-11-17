@@ -3,5 +3,9 @@ export default function DashboardWrapper({
 }: {
   children: React.ReactNode
 }) {
-  return <div>Dashboard {children}</div>
+  return (
+    <div className="flex bg-gray-50 text-gray-900 w-full min-h-screen">
+      Dashboard {children}
+    </div>
+  )
 }
