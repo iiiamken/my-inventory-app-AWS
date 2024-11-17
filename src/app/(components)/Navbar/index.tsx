@@ -1,10 +1,10 @@
 "use client"
 import { Bell, Menu, Settings, Sun } from "lucide-react"
 import Link from "next/link"
-
 export default function Navbar() {
   return (
     <div className="flex justify-between items-center w-full mb-7">
+      {/* Left Component */}
       <div className="flex justify-between items-center gap-5">
         <button
           className="p-3 bg-gray-100 rounded-full hover:bg-blue-100"
@@ -24,7 +24,7 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-
+      {/* Right Component*/}
       <div className="flex items-center justify-between gap-5">
         <div className="hidden md:flex justify-between items gap-5">
           <div>
