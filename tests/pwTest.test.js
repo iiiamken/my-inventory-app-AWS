@@ -51,15 +51,15 @@ test("check if LeoSafePlay.com/it/ anchor element opens new tab", async ({
   await expect(link).toBeVisible()
 
   const [newPage] = await Promise.all([
-    page.waitForEvent("popup"), // Wait for a new page to be opened
-    link.click(), // Click on the link
+    page.waitForEvent("popup"),
+    link.click(),
   ])
 
   // Verify that the URL has changed to the expected one
   await expect(newPage).toHaveURL("https://www.leosafeplay.com/it/")
 })
 
-test.only("check if Autovalutazione anchor element opens new tab", async ({
+test("check if Autovalutazione anchor element opens new tab", async ({
   page,
 }) => {
   // Navigate to the target page
@@ -83,8 +83,8 @@ test.only("check if Autovalutazione anchor element opens new tab", async ({
   await expect(link).toBeVisible()
 
   const [newPage] = await Promise.all([
-    page.waitForEvent("popup"), // Wait for a new page to be opened
-    link.click(), // Click on the link
+    page.waitForEvent("popup"),
+    link.click(),
   ])
 
   // Verify that the URL has changed to the expected one
