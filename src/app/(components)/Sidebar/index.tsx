@@ -1,8 +1,18 @@
 "use client"
 
+import { useAppDispatch, useAppSelector } from "@/app/redux"
+import { setIsSidebarCollapsed } from "@/state"
 import { Menu } from "lucide-react"
 
 export default function Sidebar() {
+  const isSidebarCollapsed = useAppSelector(
+    (state) => state.global.isSidebarCollapsed
+  )
+  const dispatch = useAppDispatch()
+
+  const toggleSidebar = () => {
+    dispatch(setIsSidebarCollapsed(!isSidebarCollapsed))
+  }
   return (
     <div>
       {/* Logo */}
