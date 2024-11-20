@@ -40,7 +40,9 @@ function SidebarLink({ href, icon: Icon, label, isCollapsed }: SidebarProps) {
           className={`${
             isCollapsed ? "hidden" : "block"
           } font-medium text-gray-700`}
-        ></span>
+        >
+          {label}
+        </span>
       </div>
     </Link>
   )
@@ -90,6 +92,12 @@ export default function Sidebar() {
           label="Dashboard"
           isCollapsed={isSidebarCollapsed}
         />
+        <SidebarLink
+          href="/products"
+          icon={Clipboard}
+          label="Products"
+          isCollapsed={isSidebarCollapsed}
+        />
 
         <SidebarLink
           href="/inventory"
@@ -120,7 +128,7 @@ export default function Sidebar() {
         />
       </div>
       {/*Footer*/}
-      <div>
+      <div className={`${isSidebarCollapsed ? "hidden" : "block"} mb-10`}>
         <p className="text-center text-xs text-gray-500">© 2022 Kenstock</p>
       </div>
     </div>
