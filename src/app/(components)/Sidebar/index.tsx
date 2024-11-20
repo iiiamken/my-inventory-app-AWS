@@ -25,7 +25,14 @@ function SidebarLink({ href, icon: Icon, label, isCollapsed }: SidebarProps) {
         } hover:bg-blue-100 gap-3 transition-colors ${
           isActive ? "bg-blue-200 text-white " : ""
         }`}
-      ></div>
+      >
+        <Icon className="w-6 -h6 !text-gray-700" />
+        <span
+          className={`${
+            isCollapsed ? "hidden" : "block"
+          } font-medium text-gray-700`}
+        ></span>
+      </div>
     </Link>
   )
 }
