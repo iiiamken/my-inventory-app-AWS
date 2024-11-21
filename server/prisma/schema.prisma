@@ -65,7 +65,17 @@ model PurchaseSummary {
 }
 
 model ExpenseSummary {
-  expenseSummaryId String   @id
-  totalExpenses    Float
-  date             DateTime
+  expenseSummaryId  String              @id
+  totalExpenses     Float
+  date              DateTime
+  ExpenseByCategory ExpenseByCategory[]
+}
+
+model ExpenseByCategory {
+  expenseByCategotyId String         @id
+  expenseSummaryId    String
+  category            String
+  amount              BigInt
+  date                DateTime
+  expenseSummary      ExpenseSummary @relation(fields: [expenseSummaryId], references: [expenseSummaryId])
 }
