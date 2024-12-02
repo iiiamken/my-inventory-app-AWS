@@ -54,11 +54,11 @@ export interface getDashboardData {
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_URL }),
   reducerPath: "api",
-  tagTypes: ["dashboardData"],
+  tagTypes: ["DashboardData"],
   endpoints: (build) => ({
     getDashboadData: build.query<getDashboardData, void>({
       query: () => "/dashboard",
-      providesTags: ["dashboardData"],
+      providesTags: ["DashboardData"],
     }),
   }),
 })
