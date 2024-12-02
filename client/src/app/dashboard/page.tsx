@@ -1,6 +1,6 @@
 "use client"
 
-import CardPopularProducts from "./cardPopularProducts"
+import CardPopularProducts from "./CardPopularProducts"
 
 export default function Dashboard() {
   return (
