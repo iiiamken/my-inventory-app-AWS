@@ -6,7 +6,6 @@ import helmet from "helmet"
 import morgan from "morgan"
 //Route imports
 import dashboardRoutes from "./routes/dashboardRoutes"
-import { getDashboardData } from "./controllers/dashboardController"
 //configurations
 dotenv.config()
 const app = express()
@@ -19,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors())
 
 //routes
-app.use("/dashboard", getDashboardData)
+app.use("/dashboard", dashboardRoutes)
 
 //server
 const port = process.env.PORT || 3001
