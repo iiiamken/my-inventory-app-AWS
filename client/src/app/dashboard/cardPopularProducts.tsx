@@ -4,7 +4,6 @@ import Rating from "../(components)/Rating"
 
 export default function CardPopularProducts() {
   const { data: dashboardData, isLoading } = useGetDashboadDataQuery()
-  console.log("dashboardData", dashboardData)
   return (
     <div className="row-span 3 xl:row-span-6 bg-white shadow-md rounded-2xl pb-16">
       {isLoading ? (
