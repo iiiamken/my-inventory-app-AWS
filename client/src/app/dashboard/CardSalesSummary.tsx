@@ -1,17 +1,17 @@
-"use client"
-import { useState } from "react"
 import { useGetDashboadDataQuery } from "@/state/api"
-import { BarChart, TrendingUp } from "lucide-react"
+import { TrendingUp } from "lucide-react"
+import React, { useState } from "react"
 import {
-  ResponsiveContainer,
-  CartesianGrid,
-  XAxis,
-  Tooltip,
   Bar,
+  BarChart,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
   YAxis,
 } from "recharts"
 
-export default function CardSalesSummary() {
+const CardSalesSummary = () => {
   const { data, isLoading, isError } = useGetDashboadDataQuery()
   const salesData = data?.salesSummary || []
 
@@ -111,7 +111,7 @@ export default function CardSalesSummary() {
                   formatter={(value: number) => [
                     `$${value.toLocaleString("en")}`,
                   ]}
-                  labelFormatter={(label: string) => {
+                  labelFormatter={(label) => {
                     const date = new Date(label)
                     return date.toLocaleDateString("en-US", {
                       year: "numeric",
@@ -146,3 +146,5 @@ export default function CardSalesSummary() {
     </div>
   )
 }
+
+export default CardSalesSummary
