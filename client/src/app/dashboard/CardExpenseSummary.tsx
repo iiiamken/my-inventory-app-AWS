@@ -1,4 +1,4 @@
-import { useGetDashboadDataQuery } from "@/state/api"
+import { ExpenseByCategorySummary, useGetDashboadDataQuery } from "@/state/api"
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts"
 const colors = ["#00C49F", "#0088FE", "#FFBB28"]
 
@@ -14,10 +14,11 @@ export default function CardExpenseSummary() {
     (acc: ExpenseSums, item: ExpenseByCategorySummary) => {
       const category = item.category + " Expenses"
       const amount = parseInt(item.amount, 10)
-      if (!acc.category) acc.category = 0
-      acc.category += amount
+      if (!acc[category]) acc[category] = 0
+      acc[category] += amount
       return acc
-    }
+    },
+    {}
   )
 
   const expenseCategories = Object.entries(expenseSums).map(
