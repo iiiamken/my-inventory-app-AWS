@@ -11,7 +11,7 @@ import {
   YAxis,
 } from "recharts"
 
-const CardPurchaseSummary = () => {
+export default function CardPurchaseSummary() {
   const { data, isLoading } = useGetDashboadDataQuery()
   const purchaseData = data?.purchaseSummary || []
 
@@ -96,5 +96,3 @@ const CardPurchaseSummary = () => {
     </div>
   )
 }
-
-export default CardPurchaseSummary
