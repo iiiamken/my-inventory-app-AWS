@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = getUsers;
+exports.getUsers = getUsers;
 const extension_1 = require("@prisma/client/extension");
 const prisma = new extension_1.PrismaClient();
 function getUsers(res, req) {
