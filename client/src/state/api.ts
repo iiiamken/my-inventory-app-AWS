@@ -58,10 +58,16 @@ export interface getDashboardData {
   expenseByCategorySummary: ExpenseByCategorySummary[]
 }
 
+export interface User {
+  userId: string
+  name: string
+  email: string
+}
+
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
   reducerPath: "api",
-  tagTypes: ["DashboardData", "Products"],
+  tagTypes: ["DashboardData", "Products", "Users"],
   endpoints: (build) => ({
     getDashboadData: build.query<getDashboardData, void>({
       query: () => "/dashboard",
@@ -82,6 +88,10 @@ export const api = createApi({
       }),
       invalidatesTags: ["Products"],
     }),
+    getUsers: build.query<User[], string | void>({
+      query: () => "/users",
+      providesTags: ["Users"],
+    }),
   }),
 })
 
@@ -89,4 +99,5 @@ export const {
   useGetDashboadDataQuery,
   useGetProductsQuery,
   useCreateProductMutation,
+  useGetUsersQuery,
 } = api
