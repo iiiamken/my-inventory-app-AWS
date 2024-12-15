@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 type UserSettings = {
   label: string
   value: string | boolean
@@ -33,5 +35,11 @@ const mockSettings: UserSettings[] = [
 ]
 
 export default function Settings() {
+  const [userSettings, setUserSettings] = useState<UserSettings[]>(mockSettings)
+  const handleToggleChange = (index: number) => {
+    const settingsCopy = [...userSettings]
+    settingsCopy[index].value = !settingsCopy[index].value as boolean
+    setUserSettings(settingsCopy)
+  }
   return <div>Settings</div>
 }
