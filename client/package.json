@@ -10,6 +10,7 @@
     "test": "playwright test test/*.js"
   },
   "dependencies": {
+    "@mui/x-data-grid": "^7.23.2",
     "@reduxjs/toolkit": "^2.3.0",
     "dotenv": "^16.4.5",
     "lucide-react": "^0.460.0",
