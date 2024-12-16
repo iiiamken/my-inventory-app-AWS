@@ -75,6 +75,19 @@ export default function Expenses() {
               onChange={(e) => setStartDate(e.target.value)}
             />
           </div>
+          {/* End Date */}
+          <div>
+            <label htmlFor="start-date" className={classnames.label}>
+              End Date
+            </label>
+            <input
+              type="date"
+              id="end-date"
+              name="end-date"
+              className={classnames.selectInput}
+              onChange={(e) => setEndDate(e.target.value)}
+            />
+          </div>
         </div>
       </div>
     </div>
