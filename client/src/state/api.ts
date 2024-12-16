@@ -67,7 +67,7 @@ export interface User {
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
   reducerPath: "api",
-  tagTypes: ["DashboardData", "Products", "Users"],
+  tagTypes: ["DashboardData", "Products", "Users", "Expenses"],
   endpoints: (build) => ({
     getDashboadData: build.query<getDashboardData, void>({
       query: () => "/dashboard",
@@ -91,6 +91,10 @@ export const api = createApi({
     getUsers: build.query<User[], void>({
       query: () => "/users",
       providesTags: ["Users"],
+    }),
+    getExpensesByCategory: build.query<ExpenseByCategorySummary[], void>({
+      query: () => "/expenses",
+      providesTags: ["Expenses"],
     }),
   }),
 })
