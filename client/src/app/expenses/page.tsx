@@ -6,7 +6,14 @@ import {
 } from "@/state/api"
 import { useMemo, useState } from "react"
 import Header from "../(components)/Header"
-import { Pie, PieChart, ResponsiveContainer } from "recharts"
+import {
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts"
 
 type AggregatedDataItem = {
   name: string
@@ -153,7 +160,20 @@ export default function Expenses() {
               fill="#8884d8"
               dataKey="amount"
               onMouseEnter={(_, index) => setActiveIndex(index)}
-            ></Pie>
+            >
+              {aggregatedData.map(
+                (entry: AggregatedDataItem, index: number) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={
+                      index === activeIndex ? "rgb(29,78,216)" : entry.color
+                    }
+                  />
+                )
+              )}
+            </Pie>
+            <Tooltip />
+            <Legend />
           </PieChart>
         </ResponsiveContainer>
       </div>
