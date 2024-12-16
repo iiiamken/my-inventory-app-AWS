@@ -31,6 +31,7 @@ export default function Expenses() {
 
   return (
     <div>
+      {/* Header */}
       <div className="mb-5">
         <Header name="Expenses" />
         <p className="text-sm text-gray500">
@@ -43,6 +44,7 @@ export default function Expenses() {
           Filter by Category and Date
         </h3>
         <div className="space-y-4">
+          {/* Category */}
           <div>
             <label htmlFor="category" className={classnames.label}>
               Category
@@ -59,6 +61,19 @@ export default function Expenses() {
               <option>Professional</option>
               <option>Salaries</option>
             </select>
+          </div>
+          {/* Start Date */}
+          <div>
+            <label htmlFor="start-date" className={classnames.label}>
+              Start Date
+            </label>
+            <input
+              type="date"
+              id="start-date"
+              name="start-date"
+              className={classnames.selectInput}
+              onChange={(e) => setStartDate(e.target.value)}
+            />
           </div>
         </div>
       </div>
