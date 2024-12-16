@@ -1,12 +1,25 @@
 "use client"
 
-import { useGetExpensesByCategoryQuery } from "@/state/api"
+import {
+  ExpenseByCategorySummary,
+  useGetExpensesByCategoryQuery,
+} from "@/state/api"
 import { useMemo, useState } from "react"
 import Header from "../(components)/Header"
+import { Pie, PieChart, ResponsiveContainer } from "recharts"
+
+type AggregatedDataItem = {
+  name: string
+  color?: string
+  amount: number
+}
+type AggregatedData = {
+  [category: string]: AggregatedDataItem
+}
 
 export default function Expenses() {
   const [activeIndex, setActiveIndex] = useState<number>(0)
-  const [selectCategory, setSelectCategory] = useState<string>("All")
+  const [selectedCategory, setSelectedCategory] = useState<string>("All")
   const [startDate, setStartDate] = useState<string>("")
   const [endDate, setEndDate] = useState<string>("")
 
@@ -17,6 +30,43 @@ export default function Expenses() {
   } = useGetExpensesByCategoryQuery()
 
   const expenses = useMemo(() => expensesData ?? [], [expensesData])
+
+  function parseDate(dateString: string) {
+    const date = new Date(dateString).toISOString().split("T")[0]
+    return date
+  }
+
+  const aggregatedData: AggregatedDataItem[] = useMemo(() => {
+    const filtered: AggregatedData = expenses
+      .filter((data: ExpenseByCategorySummary) => {
+        const matchesCategory =
+          selectedCategory === "All" || data.category === selectedCategory
+
+        const dataDate = parseDate(data.date)
+
+        const matchesDate =
+          !startDate ||
+          !endDate ||
+          (dataDate >= startDate && dataDate <= endDate)
+
+        return matchesCategory && matchesDate
+      })
+      .reduce((acc: AggregatedData, data: ExpenseByCategorySummary) => {
+        const amount = parseInt(data.amount)
+        if (!acc[data.category]) {
+          acc[data.category] = {
+            name: data.category,
+            amount: 0,
+          }
+        }
+        acc[data.category].color = `#${Math.floor(
+          Math.random() * 16777215
+        ).toString(16)}` // Generate random color
+        acc[data.category].amount += amount
+        return acc
+      }, {})
+    return Object.values(filtered)
+  }, [expenses, selectedCategory, startDate, endDate])
 
   const classnames = {
     label: "block text-sm font-medium text-gray-700",
@@ -54,7 +104,7 @@ export default function Expenses() {
               name="category"
               className={classnames.selectInput}
               defaultValue="All"
-              onChange={(e) => setSelectCategory(e.target.value)}
+              onChange={(e) => setSelectedCategory(e.target.value)}
             >
               <option>All</option>
               <option>Office</option>
@@ -89,6 +139,23 @@ export default function Expenses() {
             />
           </div>
         </div>
+      </div>
+      {/* Pie Chart */}
+      <div className="flex-grow bg-white shadow rounded-lg p-4 md:p-6">
+        <ResponsiveContainer width="100%" height={400}>
+          <PieChart>
+            <Pie
+              data={aggregatedData}
+              cx="50%"
+              cy="50%"
+              label
+              outerRadius={150}
+              fill="#8884d8"
+              dataKey="amount"
+              onMouseEnter={(_, index) => setActiveIndex(index)}
+            ></Pie>
+          </PieChart>
+        </ResponsiveContainer>
       </div>
     </div>
   )
