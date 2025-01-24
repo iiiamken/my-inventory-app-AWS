@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test"
 
 test("check if anchor element navigates to new page", async ({ page }) => {
   // Navigate to the target page
-  await page.goto("https://www.leovegas.it/it-it/gioco-responsabile")
+  await page.goto("https://www.leovegas.it/it-it/gioco-re sponsabile")
 
   const acceptCookiesButton = page.locator(
     'button[data-test-id="button-accept-cookies"]'
